@@ -1,5 +1,5 @@
-const R = require('ramda')
-const { createMatrix } = require('./matrix')
+import R from 'ramda'
+import { createMatrix } from './matrix.js'
 
 const hr = (n) => Array(n).fill('\u2500').join('')
 const top = (n) => '\u250C' + hr(n) + '\u2510'
@@ -12,11 +12,9 @@ const matrixToStr = (matrix) => {
   return [top(cols), ...matrix.map(lineToStr), bottom(cols)].join('\r\n')
 }
 
-const render = R.curry((rows, cols, state) => {
+export const render = R.curry((rows, cols, state) => {
   const matrix = createMatrix(rows, cols, state)
   const str = matrixToStr(matrix)
   console.clear()
   console.log(str)
 })
-
-module.exports = { render }

@@ -1,6 +1,6 @@
-const readline = require('readline')
+import readline from 'readline'
 
-const setupInput = (callbacks) => {
+export const setupInput = (callbacks) => {
   readline.emitKeypressEvents(process.stdin)
   process.stdin.setRawMode(true)
   process.stdin.on('keypress', (str, key) => {
@@ -8,5 +8,3 @@ const setupInput = (callbacks) => {
     callbacks[key.name]?.()
   })
 }
-
-module.exports = { setupInput }

@@ -1,4 +1,4 @@
-const R = require('ramda')
+import R from 'ramda'
 
 const update = R.curry((str, point) =>
   R.adjust(
@@ -13,7 +13,7 @@ const addSnake = state => R.pipe(...R.map(update(2), state.snake))
 
 const repeatDot = R.repeat(0)
 
-const createMatrix = (rows, cols, state) => {
+export const createMatrix = (rows, cols, state) => {
   const matrix = R.map(
     R.thunkify(repeatDot)(rows),
     repeatDot(cols),
@@ -24,5 +24,3 @@ const createMatrix = (rows, cols, state) => {
     addApple(state),
   )(matrix)
 }
-
-module.exports = { createMatrix }

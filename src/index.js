@@ -1,6 +1,6 @@
-const { setupInput } = require('./input-keys')
-const { render } = require('./output-cli')
-const { start } = require('./snake')
+import { setupInput } from './input-keys.js'
+import { render } from './output-cli.js'
+import { start } from './snake.js'
 
 const options = { cols: 30, rows: 15 }
 

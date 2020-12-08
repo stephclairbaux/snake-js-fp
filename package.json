@@ -4,6 +4,10 @@
   "private": true,
   "author": "Stéphane Clairbaux <stephane@clairbaux.com>",
   "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node" : ">=13.9.0"
+  },
   "scripts": {
     "start": "node src"
   },

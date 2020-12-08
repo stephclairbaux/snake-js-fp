@@ -1,6 +1,6 @@
-const { initialState, step, up, left, down, right } = require('./core')
+import { initialState, step, up, left, down, right } from './core.js'
 
-const start = (setupInput, render, options = {}) => {
+export const start = (setupInput, render, options = {}) => {
   const { cols = 30, rows = 15, speed = 100} = options
 
   let state = initialState
@@ -20,5 +20,3 @@ const start = (setupInput, render, options = {}) => {
     state = nextState(state)
   }, speed)
 }
-
-module.exports = { start }
