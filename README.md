@@ -1,3 +1,3 @@
 # snake-js-fp
 
-WIP
+![Snake Demo](demo.gif)
