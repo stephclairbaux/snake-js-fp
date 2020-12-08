@@ -1,6 +1,7 @@
 {
   "name": "snake-js-fp",
   "version": "0.1.0",
+  "private": true,
   "author": "Stéphane Clairbaux <stephane@clairbaux.com>",
   "license": "MIT",
   "scripts": {
