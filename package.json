@@ -1,0 +1,12 @@
+{
+  "name": "snake-js-fp",
+  "version": "0.1.0",
+  "author": "Stéphane Clairbaux <stephane@clairbaux.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src"
+  },
+  "dependencies": {
+    "ramda": "^0.27.1"
+  }
+}
