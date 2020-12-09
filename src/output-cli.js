@@ -17,5 +17,6 @@ export const render = R.curry((rows, cols, state) => {
   const matrix = createMatrix(rows, cols, state)
   const str = matrixToStr(matrix)
   console.clear()
+  console.log(`Score: ${state.score}`)
   console.log(str)
 })
