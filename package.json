@@ -9,10 +9,13 @@
     "node": ">=13.9.0"
   },
   "scripts": {
-    "start": "node src"
+    "start": "node src",
+    "test": "tape src/**/*.test.cjs | faucet"
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "ramda": "^0.27.1"
+    "faucet": "^0.0.1",
+    "ramda": "^0.27.1",
+    "tape": "^5.0.1"
   }
 }
