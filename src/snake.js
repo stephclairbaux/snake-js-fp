@@ -1,22 +1,29 @@
+import{ pipe } from 'ramda'
+import{ scan, merge, periodic, map, tap, runEffects } from '@most/core'
+import{ createAdapter } from '@most/adapter'
+import{ newDefaultScheduler } from '@most/scheduler'
 import { initialState, step, up, left, down, right } from './core.js'
 
-export const start = (setupInput, render, options = {}) => {
+export const start = (addInput, render, options = {}) => {
   const { cols = 30, rows = 15, speed = 100} = options
 
-  let state = initialState
+  const [induce, events] = createAdapter()
 
-  setupInput({
-    up: () => state = up(state),
-    left: () => state = left(state),
-    down: () => state = down(state),
-    right: () => state = right(state),
+  addInput({
+    left: () => induce(left),
+    right: () => induce(right),
+    up: () => induce(up),
+    down: () => induce(down),
   })
 
-  const renderState = render(cols, rows)
-  const nextState = step(cols, rows)
+  const effects = pipe(
+    periodic,
+    map(() => step(cols, rows)),
+    merge(events),
+    scan((x, f) => ({ state: f(x.state), f }), { state: initialState }),
+    map(({ state }) => state),
+    tap(render(cols, rows)),
+  )
 
-  setInterval(() => {
-    renderState(state)
-    state = nextState(state)
-  }, speed)
+  runEffects(effects(speed), newDefaultScheduler())
 }

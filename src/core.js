@@ -16,10 +16,13 @@ export const initialState = {
   snake: [point(2, 2)],
   apple: point(5, 5),
   move: direction.EAST,
+  score: 0,
 }
 
 const addMove = R.curry((direction, state) =>
-  isValidMove(direction, state.move) ? { ...state, move: direction } : state
+  isValidMove(direction, state.move)
+    ? { ...state, move: direction }
+    : state
 )
 
 const isValidMove = (direction, move) =>
@@ -33,12 +36,16 @@ export const right = addMove(direction.EAST)
 const nextSnake = R.curry((cols, rows, state) =>
   willCrash(cols, rows, state)
     ? initialState
-    : {
-        ...state,
-        snake: willEat(nextHead(cols, rows, state), state.apple)
-          ? [nextHead(cols, rows, state), ...state.snake]
-          : [nextHead(cols, rows, state), ...R.dropLast(1, state.snake)],
-      }
+    : willEat(nextHead(cols, rows, state), state.apple)
+      ? {
+          ...state,
+          score: state.score + 1,
+          snake: [nextHead(cols, rows, state), ...state.snake],
+        }
+      : {
+          ...state,
+          snake: [nextHead(cols, rows, state), ...R.dropLast(1, state.snake)],
+        }
 )
 
 const willEat = R.equals
