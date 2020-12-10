@@ -1,9 +1,12 @@
 import R from 'ramda'
-import { mod, rand } from './utils.js'
+import { mod, randomElement, range } from './utils.js'
 
-const randomPos = (pos) => rand(0, pos - 1)
+const point = R.curry((x, y) => ({ x, y }))
 
-const point = (x, y) => ({ x, y })
+const allPoints = (cols, rows) => R.chain(
+  (x) => R.map(point(x), range(rows)),
+  range(cols),
+)
 
 const direction = {
   NORTH: point(0, -1),
@@ -60,9 +63,15 @@ const nextHead = (cols, rows, { move, snake }) =>
 
 const nextApple = R.curry((cols, rows, state) =>
   willEat(R.head(state.snake), state.apple)
-    ? { ...state, apple: point(randomPos(cols), randomPos(rows)) }
+    ? { ...state, apple: randomPoint(cols, rows, state) }
     : state
 )
+
+const randomPoint = (cols, rows, state) => R.pipe(
+  allPoints,
+  R.filter((p) => !state.snake.some(R.equals(p))),
+  randomElement,
+)(cols, rows)
 
 export const step = R.curry((cols, rows, state) =>
   R.pipe(nextSnake(cols, rows), nextApple(cols, rows))(state)
