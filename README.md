@@ -1,5 +1,5 @@
-# snake-js-fp
+# snake
 
-![Node.js CI](https://github.com/xuab/snake-js-fp/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/xuab/snake/workflows/Node.js%20CI/badge.svg)
 
 ![Snake Demo](demo.gif)
